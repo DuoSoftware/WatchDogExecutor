@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var fs = require('fs');
 
-var obstore= require('./Core/ObjecstoreStarter')
+var modMan= require('./Control/ModuleManager')
 
 var app = express();
 
@@ -18,12 +18,24 @@ app.get('/', function(req, res){
     res.send('Execution Time...');
 });
 
-app.post('/startOBstore', function(req, res){
+app.post('/restartobjectstore', function(req, res){
 
-    //Should check a Token before executing method
+    console.log(req.query);
+    //TODO: Should check a Token before executing method
 
-    obstore.restart(function(found){
-        res.json({'success':found});
+    modMan.reStartObjectStore(function(found){
+        res(found);
+    });
+
+    //res.send('dssd');
+});
+
+app.post('/restartduoauth', function(req, res){
+
+    //TODO: Should check a Token before executing method
+
+    modMan.reStartDuoAuth(function(found){
+        res(found);
     });
 
     //res.send('dssd');
