@@ -8,7 +8,8 @@ var ObjectStore = require('../Core/ObjecstoreStarter');
 
 
 
-function reStartObjectStore(response){
+function reStartObjectStore(data, response){
+
 
     ObjectStore.restart(function(found){
         if(found.success==true){

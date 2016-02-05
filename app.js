@@ -7,23 +7,32 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var fs = require('fs');
 
-var modMan= require('./Control/ModuleManager')
-
 var app = express();
-
-
+app.use(bodyParser.json());
 app.set('port', process.env.PORT || 7001);
 
-app.get('/', function(req, res){
+
+var modMan= require('./Control/ModuleManager')
+
+
+//app.use(bodyParser.json());
+
+
+
+app.post('/', function(req, res){
+
+    console.log('Test Request received');
     res.send('Execution Time...');
 });
 
 app.post('/restartobjectstore', function(req, res){
 
-    console.log(req.query);
+    console.log(req.body);
+    res.send('Executed');
+
     //TODO: Should check a Token before executing method
 
-    modMan.reStartObjectStore(function(found){
+    modMan.reStartObjectStore(req.body,function(found){
         res(found);
     });
 
@@ -43,7 +52,7 @@ app.post('/restartduoauth', function(req, res){
 
 
 
-
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 });
+

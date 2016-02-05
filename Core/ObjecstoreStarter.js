@@ -11,7 +11,10 @@ var sh = require('shelljs');
 function restart(response){
 
     //'docker ps | grep "<name of the image>"
-    var ps = sh.exec('docker ps | grep "objectstore"', {silent:true}).output;
+    //var ps = sh.exec('docker ps | grep "objectstore"', {silent:true}).output;
+
+    var ps = sh.exec('docker ps -q', {silent:true}).output;
+    var psarray = ps.split(" ");
 
     //console.log(ps);
 
