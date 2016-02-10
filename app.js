@@ -27,13 +27,22 @@ app.post('/', function(req, res){
 
 app.post('/restartobjectstore', function(req, res){
 
-    console.log(req.body);
-    res.send('Executed');
+    //console.log(req.body);
+    //res.send('Executed');
+
+
 
     //TODO: Should check a Token before executing method
 
     modMan.reStartObjectStore(req.body,function(found){
-        res(found);
+
+        if(found.success==true){
+            res.status(200).json(found)
+        }
+
+        else{
+            res.status(400).json(found)
+        }
     });
 
     //res.send('dssd');
@@ -44,7 +53,15 @@ app.post('/restartduoauth', function(req, res){
     //TODO: Should check a Token before executing method
 
     modMan.reStartDuoAuth(function(found){
-        res(found);
+
+        if(found.success!=true){
+            res.status(200).json(found)
+        }
+
+        else{
+            res.status(400).json(found)
+        }
+
     });
 
     //res.send('dssd');

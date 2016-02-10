@@ -11,17 +11,16 @@ var ObjectStore = require('../Core/ObjecstoreStarter');
 function reStartObjectStore(data, response){
 
 
-    ObjectStore.restart(function(found){
-        if(found.success==true){
+    ObjectStore.restart(data, function(found){
 
-            console.log(found.message);
-            response(found.message);
+        if(found.success==true){
+            console.log(found);
+            response(found);
 
         }
-        if(found.success==false){
-
-            console.log(found.message);
-            response(found.message);
+        else{
+            console.log(found);
+            response(found);
 
         }
 
@@ -33,14 +32,14 @@ function reStartDuoAuth(response){
     DuoAuth.restart(function(found){
         if(found.success==true){
 
-            console.log(found.message);
-            response(found.message);
+            console.log(found);
+            response(found);
 
         }
         if(found.success==false){
 
-            console.log(found.message);
-            response(found.message);
+            console.log(found);
+            response(found);
 
         }
 
